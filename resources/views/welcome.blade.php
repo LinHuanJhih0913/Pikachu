@@ -55,7 +55,7 @@
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
+                /*text-transform: uppercase;*/
             }
 
             .m-b-md {
@@ -66,8 +66,14 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
+                @if(auth()->check())
+                    welcome,
+                    <a href="/u/{{auth()->user()['id']}}">{{auth()->user()['name']}}</a>
+                    <a href="/logout">Logout</a>
+                @else
+                    <a href="/login">login</a>
+                    <a href="/register">Register</a>
+                @endif
             </div>
 
             <div class="content">
@@ -75,14 +81,11 @@
                     Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                @if(auth()->check())
+                    <div class="links">
+                        <a href="/u/{{auth()->user()['id']}}">User Profile</a>
+                    </div>
+                @endif
             </div>
         </div>
     </body>

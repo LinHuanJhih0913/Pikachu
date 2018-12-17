@@ -48,8 +48,6 @@ body {
     border-top-right-radius: 0;
 }
 
-#inputPassword_confirmation {
-    margin-bottom: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+.form-signin button[type="submit"] {
+    margin-top: 10px;
 }

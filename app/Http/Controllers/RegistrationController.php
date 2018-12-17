@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('register/register');
     }

@@ -14,8 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/register', 'RegistrationController@index');
+Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'LoginController@index');
+Route::get('/login', 'LoginController@create');
 Route::post('/login', 'LoginController@store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/u/{user}', 'UserController@show');
+    Route::put('/u/{user}', 'UserController@update');
+    Route::get('/logout', 'LoginController@destory');
+});

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('login/login');
     }
@@ -25,6 +25,12 @@ class LoginController extends Controller
             dd('error');
         }
 
-        return redirect('/profile');
+        return redirect('/');
+    }
+
+    public function destory()
+    {
+        auth()->logout();
+        return redirect('/');
     }
 }
