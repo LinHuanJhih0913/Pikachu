@@ -15,6 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->string('tradeNo');
+            $table->string('tradeDate');
+            $table->integer('price');
+            $table->boolean('isPay')->nullable()->default(false);
             $table->timestamps();
         });
     }

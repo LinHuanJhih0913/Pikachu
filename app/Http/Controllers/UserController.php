@@ -24,6 +24,6 @@ class UserController extends Controller
                 'name' => $request['name']
             ]);
 
-        return redirect('/u/' . $request->user()['id']);
+        return redirect('/');
     }
 }
