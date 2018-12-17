@@ -20,8 +20,11 @@ Route::post('/register', 'RegistrationController@store');
 Route::get('/login', 'LoginController@create');
 Route::post('/login', 'LoginController@store');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/u/{user}', 'UserController@show');
     Route::put('/u/{user}', 'UserController@update');
     Route::get('/logout', 'LoginController@destory');
+
+    Route::get('/payment', 'PaymentController@create');
+    Route::post('/payment', 'PaymentController@store');
 });

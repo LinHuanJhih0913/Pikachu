@@ -84,6 +84,7 @@
                 @if(auth()->check())
                     <div class="links">
                         <a href="/u/{{auth()->user()['id']}}">User Profile</a>
+                        <a href="/payment">Payment</a>
                     </div>
                 @endif
             </div>
