@@ -33,19 +33,19 @@ class PlayController extends Controller
             ]);
         }
 
-        Play::create([
-            'user_id' => $user['id'],
-            'game_id' => $request['game_id']
-        ]);
-
-        Play::achieve($user);
-
         if ($user->balance < 10) {
             return response()->json([
                 'result' => 'fail',
                 'message' => 'money not enough'
             ]);
         } else {
+            Play::create([
+                'user_id' => $user['id'],
+                'game_id' => $request['game_id']
+            ]);
+
+            Play::achieve($user);
+
             User::where('api_token', $request['api_token'])->update([
                 'balance' => ($user->balance - 10)
             ]);
