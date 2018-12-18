@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\sdk\SDKAdapter;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -17,7 +18,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $sdk = new SDKAdapter(
-            'http://945d44a4.ngrok.io/',
+            'http://e49fbf3d.ngrok.io/',
             $request['price'],
             "good good eat",
             $request['tradeNo'],
@@ -49,6 +50,8 @@ class PaymentController extends Controller
             Log::info("TRUE");
             Order::where('tradeNo', $request['MerchantTradeNo'])
                 ->update(['isPay' => true]);
+            $user = Order::where('tradeNo', $request['MerchantTradeNo'])->first();
+            User::where('id', $user->user_id)->update(['balance' => $user->price]);
         } else {
             Log::info("FALSE");
         }
