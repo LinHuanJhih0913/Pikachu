@@ -14,7 +14,7 @@ class AddCoin extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('balance')->after('email');
+            $table->integer('balance')->default(0)->nullable()->after('email');
         });
     }
 
@@ -26,7 +26,7 @@ class AddCoin extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('balance');
+            $table->dropColumn('balance');
         });
     }
 }
