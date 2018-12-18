@@ -17,11 +17,12 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $sdk = new SDKAdapter(
-            'http://299c6236.ngrok.io/api/returnurl',
+            'http://945d44a4.ngrok.io/',
             $request['price'],
             "good good eat",
             $request['tradeNo'],
-            $request['tradeDate']
+            $request['tradeDate'],
+            $request->user()['id']
         );
         $sdk->addItem([
             'Name' => "donate",
@@ -46,10 +47,8 @@ class PaymentController extends Controller
 
         if ($request['CheckMacValue'] == $this->checkMac($url)) {
             Log::info("TRUE");
-            Order::where('tradeNo', $request['tradeNo'])
-                ->update([
-                    'isPay' => true
-                ]);
+            Order::where('tradeNo', $request['MerchantTradeNo'])
+                ->update(['isPay' => true]);
         } else {
             Log::info("FALSE");
         }

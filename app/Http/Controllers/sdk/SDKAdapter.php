@@ -14,7 +14,7 @@ class SDKAdapter
 {
     protected $obj;
 
-    public function __construct($returnURL, $totalAmount, $descript, $tradeNo, $tradeDate)
+    public function __construct($returnURL, $totalAmount, $descript, $tradeNo, $tradeDate, $user_id)
     {
         $this->obj = new \AllInOne();
         //服務參數
@@ -25,14 +25,14 @@ class SDKAdapter
         $this->obj->EncryptType = \EncryptType::ENC_SHA256;
 
         //基本參數(請依系統規劃自行調整)
-        $this->obj->Send['ReturnURL'] = $returnURL;
+        $this->obj->Send['ReturnURL'] = $returnURL . "api/returnurl";
         $this->obj->Send['MerchantTradeNo'] = $tradeNo;
         $this->obj->Send['MerchantTradeDate'] = $tradeDate;
         $this->obj->Send['TotalAmount'] = $totalAmount;
         $this->obj->Send['TradeDesc'] = $descript;
         $this->obj->Send['ChoosePayment'] = \PaymentMethod::Credit;
 
-        $this->obj->Send['ClientBackURL'] = "http://299c6236.ngrok.io/";
+        $this->obj->Send['ClientBackURL'] = $returnURL . "payment/u/$user_id";
     }
 
     public function addItem($item = [])
