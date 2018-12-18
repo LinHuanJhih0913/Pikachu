@@ -74,4 +74,36 @@ class LoginController extends Controller
             ]
         ]);
     }
+
+    public function destory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'api_token' => 'required|max:64'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => $validator->errors()
+            ]);
+        }
+        $user = User::where('api_token', $request['api_token'])->first();
+        if (!$request['api_token']) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'token error'
+            ]);
+        } else {
+            $user->update([
+                'api_token' => null
+            ]);
+        }
+        return response()->json([
+            'result' => 'success',
+            'data' => [
+                'name' => $user['name'],
+                'blance' => '',
+                'api_token' => $user['api_token'],
+            ]
+        ]);
+    }
 }
