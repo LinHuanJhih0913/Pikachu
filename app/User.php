@@ -27,4 +27,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function genAPIToken()
+    {
+        do {
+            $api_token = $this->makeAPIToken();
+        } while (User::where('api_token', $api_token)->first() instanceof User);
+
+        return $api_token;
+    }
+
+    private function makeAPIToken()
+    {
+        return str_random(64);
+    }
 }
