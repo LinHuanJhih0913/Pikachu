@@ -24,12 +24,6 @@ class AchieveTableSeeder extends Seeder
                 'name' => $name
             ]);
         }
-        foreach ($name2 as $name) {
-            \Illuminate\Support\Facades\DB::table('achieve_lists')->insert([
-                'game_id' => 1,
-                'name' => $name
-            ]);
-        }
         foreach ($name3 as $name) {
             \Illuminate\Support\Facades\DB::table('achieve_lists')->insert([
                 'game_id' => 2,
@@ -43,12 +37,6 @@ class AchieveTableSeeder extends Seeder
             ]);
         }
         foreach ($name5 as $name) {
-            \Illuminate\Support\Facades\DB::table('achieve_lists')->insert([
-                'game_id' => 4,
-                'name' => $name
-            ]);
-        }
-        foreach ($name6 as $name) {
             \Illuminate\Support\Facades\DB::table('achieve_lists')->insert([
                 'game_id' => 4,
                 'name' => $name

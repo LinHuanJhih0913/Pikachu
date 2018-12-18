@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Play;
+use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,6 +48,11 @@ class PlayController extends Controller
         } else {
             User::where('api_token', $request['api_token'])->update([
                 'balance' => ($user->balance - 10)
+            ]);
+            Transaction::create([
+                'user_id' => $user->id,
+                'game_id' => $request['game_id'],
+                'amount' => -10
             ]);
             return response()->json([
                 'result' => 'success',

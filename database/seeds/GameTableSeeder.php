@@ -12,7 +12,7 @@ class GameTableSeeder extends Seeder
     public function run()
     {
         $names = [
-            'Common', 'Puzzle', 'Light On', 'Keep Sharking'
+            'Common', 'Puzzle', 'Light On', 'Keep Sharking', 'Transaction'
         ];
 
         foreach ($names as $name) {

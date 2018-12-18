@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\sdk\SDKAdapter;
 use App\Order;
+use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -51,7 +52,13 @@ class PaymentController extends Controller
             Order::where('tradeNo', $request['MerchantTradeNo'])
                 ->update(['isPay' => true]);
             $user = Order::where('tradeNo', $request['MerchantTradeNo'])->first();
-            User::where('id', $user->user_id)->update(['balance' => $user->price]);
+            $balance = User::where('id', $user->user_id)->first();
+            User::where('id', $user->user_id)->update(['balance' => ($balance['balance'] + $user->price)]);
+            Transaction::create([
+                'user_id' => $user->user_id,
+                'game_id' => 5,
+                'amount' => $user->price,
+            ]);
         } else {
             Log::info("FALSE");
         }

@@ -28,5 +28,3 @@ Route::get('/games', 'API\GamesController@index');
 Route::get('/achievement', 'API\AchievementController@index');
 Route::post('/achievement', 'API\AchievementController@store');
 Route::get('/achievelist', 'API\AchieveListController@index');
-
-//Route::post('','');
