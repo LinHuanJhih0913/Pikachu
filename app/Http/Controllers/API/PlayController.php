@@ -39,11 +39,21 @@ class PlayController extends Controller
 
         Play::achieve($user);
 
-        return response()->json([
-            'result' => 'success',
-            'data' => [
-                'count' => Play::where('user_id', $user->id)->count('id')
-            ]
-        ]);
+        if ($user->balance < 10) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'money not enough'
+            ]);
+        } else {
+            User::where('api_token', $request['api_token'])->update([
+                'balance' => ($user->balance - 10)
+            ]);
+            return response()->json([
+                'result' => 'success',
+                'data' => [
+                    'balance' => $user->balance - 10
+                ]
+            ]);
+        }
     }
 }
