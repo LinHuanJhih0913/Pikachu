@@ -25,4 +25,5 @@ Route::delete('/logout', 'API\LoginController@destory');
 Route::post('/play', 'API\PlayController@play');
 
 Route::get('/games', 'API\GamesController@index');
-Route::get('/achievelist', 'API\AchievementController@index');
+Route::get('/achievement', 'API\AchievementController@index');
+Route::get('/achievelist', 'API\AchieveListController@index');
