@@ -41,7 +41,7 @@ class LoginController extends Controller
             'result' => 'success',
             'data' => [
                 'name' => $user['name'],
-                'blance' => '',
+                'balance' => $user['balance'],
                 'api_token' => $user['api_token'],
             ]
         ]);
@@ -69,7 +69,7 @@ class LoginController extends Controller
             'result' => 'success',
             'data' => [
                 'name' => $user['name'],
-                'blance' => '',
+                'balance' => $user['balance'],
                 'api_token' => $user['api_token'],
             ]
         ]);
@@ -101,7 +101,7 @@ class LoginController extends Controller
             'result' => 'success',
             'data' => [
                 'name' => $user['name'],
-                'blance' => '',
+                'balance' => $user['balance'],
                 'api_token' => $user['api_token'],
             ]
         ]);
