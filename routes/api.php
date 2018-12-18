@@ -22,4 +22,6 @@ Route::post('/login', 'API\LoginController@store');
 Route::post('/autologin', 'API\LoginController@autologin');
 Route::delete('/logout', 'API\LoginController@destory');
 
-Route::post('/play', 'API\PlayController@play');
+Route::post('/', 'API\PlayController@play');
+
+Route::get('/games', 'API\GamesController@index');
