@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Shop;
+use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,6 +41,7 @@ class ShopController extends Controller
         $validator = Validator::make($request->all(), [
             'game_id' => 'required|numeric',
             'item_id' => 'required|numeric',
+            'cost' => 'required|numeric',
             'api_token' => 'required|max:64'
         ]);
         if ($validator->fails()) {
@@ -55,10 +57,15 @@ class ShopController extends Controller
                 'message' => 'token error'
             ]);
         }
-        if (Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->count('id') != 1) {
+        if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
             Shop::create([
                 'game_id' => $request['game_id'],
                 'item_id' => $request['item_id']
+            ]);
+            Transaction::create([
+                'user_id' => $user->id,
+                'game_id' => $request['game_id'],
+                'amount' => $request['cost'],
             ]);
         }
         return response()->json([
