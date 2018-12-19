@@ -70,6 +70,20 @@ class ShopController extends Controller
                 'message' => 'money not enough'
             ]);
         }
+        if ($request['game_id'] == 2) {
+            Shop::create([
+                'game_id' => $request['game_id'],
+                'item_id' => $request['item_id']
+            ]);
+            User::where('id', $user->id)->update([
+                'balance' => ($user->balance - $request['cost'])
+            ]);
+            Transaction::create([
+                'user_id' => $user->id,
+                'game_id' => $request['game_id'],
+                'amount' => -$request['cost'],
+            ]);
+        }
         if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
             Shop::create([
                 'game_id' => $request['game_id'],
