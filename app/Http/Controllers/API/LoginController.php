@@ -87,16 +87,15 @@ class LoginController extends Controller
             ]);
         }
         $user = User::where('api_token', $request['api_token'])->first();
-        if (!$request['api_token']) {
+        if ($user == null) {
             return response()->json([
                 'result' => 'fail',
                 'message' => 'token error'
             ]);
-        } else {
-            $user->update([
-                'api_token' => null
-            ]);
         }
+        $user->update([
+            'api_token' => null
+        ]);
         return response()->json([
             'result' => 'success',
             'data' => [
