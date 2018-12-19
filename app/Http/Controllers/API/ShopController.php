@@ -27,7 +27,7 @@ class ShopController extends Controller
             ]);
         }
 
-        $items = Shop::where('game_id', $game_id)->get(['game_id', 'item_id']);
+        $items = Shop::where('game_id', $game_id)->get(['item_id']);
         return response()->json([
             'result' => 'success',
             'data' => $items
@@ -55,15 +55,30 @@ class ShopController extends Controller
                 'message' => 'token error'
             ]);
         }
+        if ($user->balance < 0) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'money not enough'
+            ]);
+        }
+        if ($request['cost'] > $user->balance) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'money not enough'
+            ]);
+        }
         if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
             Shop::create([
                 'game_id' => $request['game_id'],
                 'item_id' => $request['item_id']
             ]);
+            User::where('id', $user->id)->update([
+                'balance' => ($user->balance - $request['cost'])
+            ]);
             Transaction::create([
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
-                'amount' => $request['cost'],
+                'amount' => -$request['cost'],
             ]);
         }
         return response()->json([
