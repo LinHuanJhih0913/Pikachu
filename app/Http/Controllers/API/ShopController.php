@@ -38,11 +38,6 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
-        dd(DB::table('shop_lists')
-            ->where('game_id', $request['game_id'])
-            ->where('item_id', $request['item_id'])
-            ->first()->name
-        );
         Log::info("========================== /api/shop store");
         Log::info($request);
         $validator = Validator::make($request->all(), [
