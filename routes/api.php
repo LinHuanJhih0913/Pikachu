@@ -32,3 +32,7 @@ Route::get('/achievelist', 'API\AchieveListController@index');
 Route::get('/detail', 'API\TransationController@index');
 
 Route::get('/balance', 'UserController@getBalance');
+
+Route::get('/shop', 'API\ShopController@index');
+Route::post('/shop', 'API\ShopController@store');
+Route::delete('/shop', 'API\ShopController@destory');
