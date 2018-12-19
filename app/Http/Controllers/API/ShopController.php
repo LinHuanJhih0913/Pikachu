@@ -100,7 +100,9 @@ class ShopController extends Controller
         }
         return response()->json([
             'result' => 'success',
-            'data' => ''
+            'data' => [
+                'balance' => User::where('api_token', $request['api_token'])->first()->balance
+            ]
         ]);
     }
 
