@@ -27,7 +27,7 @@ class TransationController extends Controller
         $transaction = Transaction::where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
             ->limit(30)
-            ->get(['user_id', 'game_id', 'amount', 'updated_at']);
+            ->get(['user_id', 'game_id', 'amount', 'description', 'updated_at']);
         return response()->json([
             'result' => 'success',
             'data' => $transaction
