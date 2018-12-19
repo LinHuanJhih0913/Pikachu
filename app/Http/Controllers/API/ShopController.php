@@ -7,6 +7,7 @@ use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
@@ -36,6 +37,8 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
+        Log::info("========================== /api/shop store");
+        Log::info($request);
         $validator = Validator::make($request->all(), [
             'game_id' => 'required|numeric',
             'item_id' => 'required|numeric',
