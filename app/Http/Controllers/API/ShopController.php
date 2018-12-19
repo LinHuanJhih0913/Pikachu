@@ -7,6 +7,7 @@ use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -37,6 +38,11 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
+        dd(DB::table('shop_lists')
+            ->where('game_id', $request['game_id'])
+            ->where('item_id', $request['item_id'])
+            ->first()->name
+        );
         Log::info("========================== /api/shop store");
         Log::info($request);
         $validator = Validator::make($request->all(), [
@@ -82,7 +88,11 @@ class ShopController extends Controller
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
                 'amount' => -$request['cost'],
-                'description' => '購買道具'
+                'description' => '購買道具' . DB::table('shop_lists')
+                        ->where('game_id', $request['game_id'])
+                        ->where('item_id', $request['item_id'])
+                        ->first()
+                        ->name
             ]);
         }
         if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
@@ -97,7 +107,11 @@ class ShopController extends Controller
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
                 'amount' => -$request['cost'],
-                'description' => '購買道具'
+                'description' => '購買道具' . DB::table('shop_lists')
+                        ->where('game_id', $request['game_id'])
+                        ->where('item_id', $request['item_id'])
+                        ->first()
+                        ->name
             ]);
         }
         return response()->json([
