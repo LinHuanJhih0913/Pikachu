@@ -24,7 +24,9 @@ class TransationController extends Controller
                 'message' => 'api_token error'
             ]);
         }
-        $transaction = Transaction::where('user_id', $user->id)->get(['user_id', 'game_id', 'amount', 'updated_at']);
+        $transaction = Transaction::where('user_id', $user->id)
+            ->orderBy('updated_at', 'desc')
+            ->get(['user_id', 'game_id', 'amount', 'updated_at']);
         return response()->json([
             'result' => 'success',
             'data' => $transaction
