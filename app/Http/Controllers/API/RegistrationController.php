@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,6 +30,12 @@ class RegistrationController extends Controller
             'password' => bcrypt($request['password']),
         ]);
 
+        $user = User::where('email', $request['email'])->first();
+        Transaction::create([
+            'user_id' => $user->id,
+            'game_id' => 5,
+            'amount' => 500
+        ]);
         return response()->json([
             'result' => 'success',
             'data' => '',
