@@ -19,7 +19,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $sdk = new SDKAdapter(
-            ' http://2c28e50f.ngrok.io/',
+            'http://ba33b5ee.ngrok.io/',
             $request['price'],
             "good good eat",
             $request['tradeNo'],
@@ -58,6 +58,7 @@ class PaymentController extends Controller
                 'user_id' => $user->user_id,
                 'game_id' => 5,
                 'amount' => $user->price,
+                'description' => '儲值'
             ]);
         } else {
             Log::info("FALSE");

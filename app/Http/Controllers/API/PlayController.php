@@ -52,7 +52,8 @@ class PlayController extends Controller
             Transaction::create([
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
-                'amount' => -10
+                'amount' => -10,
+                'description' => '玩遊戲'
             ]);
             return response()->json([
                 'result' => 'success',

@@ -34,7 +34,8 @@ class RegistrationController extends Controller
         Transaction::create([
             'user_id' => $user->id,
             'game_id' => 5,
-            'amount' => 500
+            'amount' => 500,
+            'description' => '儲值'
         ]);
         return response()->json([
             'result' => 'success',

@@ -82,6 +82,7 @@ class ShopController extends Controller
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
                 'amount' => -$request['cost'],
+                'description' => '購買道具'
             ]);
         }
         if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
