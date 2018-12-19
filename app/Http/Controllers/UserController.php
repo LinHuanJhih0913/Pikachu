@@ -26,4 +26,28 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    public function getBalance(Request $request)
+    {
+        if (!$request->bearerToken()) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'no api in header'
+            ]);
+        }
+        $user = User::where('api_token', $request->bearerToken())->first();
+        if (!$user) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'api_token error'
+            ]);
+        }
+
+        return response()->json([
+            'result' => 'success',
+            'data' => [
+                'balance' => $user->balance
+            ]
+        ]);
+    }
 }

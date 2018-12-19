@@ -19,7 +19,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $sdk = new SDKAdapter(
-            'http://dd7b82a8.ngrok.io/',
+            ' http://2c28e50f.ngrok.io/',
             $request['price'],
             "good good eat",
             $request['tradeNo'],

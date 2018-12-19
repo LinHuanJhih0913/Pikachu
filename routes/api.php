@@ -30,3 +30,5 @@ Route::post('/achievement', 'API\AchievementController@store');
 Route::get('/achievelist', 'API\AchieveListController@index');
 
 Route::get('/detail', 'API\TransationController@index');
+
+Route::get('/balance', 'UserController@getBalance');
