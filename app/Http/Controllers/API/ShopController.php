@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $game_id)
     {
         if (!$request->bearerToken()) {
             return response()->json([
@@ -27,12 +27,10 @@ class ShopController extends Controller
             ]);
         }
 
-        $items = Shop::where('game_id', $request->header('game_id'))->get(['game_id', 'item_id']);
+        $items = Shop::where('game_id', $game_id)->get(['game_id', 'item_id']);
         return response()->json([
             'result' => 'success',
-            'data' => [
-                'items' => $items
-            ]
+            'data' => $items
         ]);
     }
 
