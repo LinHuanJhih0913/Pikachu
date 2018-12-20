@@ -123,6 +123,8 @@ class ShopController extends Controller
 
     public function destory(Request $request)
     {
+        Log::info('******************** /api/shop destory');
+        Log::info($request);
         $validator = Validator::make($request->all(), [
             'game_id' => 'required|numeric',
             'item_id' => 'required|numeric',
