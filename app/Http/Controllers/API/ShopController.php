@@ -93,7 +93,7 @@ class ShopController extends Controller
                         ->name
             ]);
         }
-        if (!Shop::where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
+        if (!Shop::where('user_id', $user->id)->where('game_id', $request['game_id'])->where('item_id', $request['item_id'])->first()) {
             Shop::create([
                 'user_id' => $user->id,
                 'game_id' => $request['game_id'],
