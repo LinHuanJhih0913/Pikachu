@@ -29,7 +29,9 @@ class ShopController extends Controller
             ]);
         }
 
-        $items = Shop::where('game_id', $game_id)->get(['item_id']);
+        $items = Shop::where('user', $user->id)
+            ->where('game_id', $game_id)
+            ->get(['item_id']);
         return response()->json([
             'result' => 'success',
             'data' => $items
@@ -73,6 +75,7 @@ class ShopController extends Controller
         }
         if ($request['game_id'] == 2) {
             Shop::create([
+                'user_id' => $user->id,
                 'game_id' => $request['game_id'],
                 'item_id' => $request['item_id']
             ]);
