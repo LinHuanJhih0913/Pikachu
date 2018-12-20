@@ -29,7 +29,7 @@ class ShopController extends Controller
             ]);
         }
 
-        $items = Shop::where('user', $user->id)
+        $items = Shop::where('user_id', $user->id)
             ->where('game_id', $game_id)
             ->get(['item_id']);
         return response()->json([
