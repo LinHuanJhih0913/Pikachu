@@ -13,7 +13,10 @@ class PaymentController extends Controller
 {
     public function create()
     {
-        return view('payment.pay');
+        $data = Order::where('user_id', auth()->user()['id'])
+            ->where('isPay', true)
+            ->get();
+        return view('payment.pay', compact(['data']));
     }
 
     public function store(Request $request)

@@ -85,7 +85,6 @@
                     <div class="links">
                         <a href="/u/{{auth()->user()['id']}}">User Profile</a>
                         <a href="/payment">Donate</a>
-                        <a href="/payment/u/{{auth()->user()['id']}}">{{auth()->user()['name']}}'s Order List</a>
                     </div>
                 @endif
             </div>

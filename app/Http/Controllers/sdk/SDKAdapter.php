@@ -32,7 +32,7 @@ class SDKAdapter
         $this->obj->Send['TradeDesc'] = $descript;
         $this->obj->Send['ChoosePayment'] = \PaymentMethod::Credit;
 
-        $this->obj->Send['ClientBackURL'] = $returnURL . "payment/u/$user_id";
+        $this->obj->Send['ClientBackURL'] = $returnURL . "payment";
     }
 
     public function addItem($item = [])

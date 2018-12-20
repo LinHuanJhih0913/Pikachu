@@ -27,6 +27,4 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/payment', 'PaymentController@create');
     Route::post('/payment', 'PaymentController@store');
-
-    Route::get('/payment/u/{user}', 'OrderController@index');
 });
