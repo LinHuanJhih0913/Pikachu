@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/returnurl', 'PaymentController@returnurl');
-Route::post('/register', 'API\RegistrationController@store')->middleware('cors');
+Route::post('/register', 'API\RegistrationController@store');
 Route::post('/login', 'API\LoginController@store');
 Route::post('/autologin', 'API\LoginController@autologin');
 Route::delete('/logout', 'API\LoginController@destory');
